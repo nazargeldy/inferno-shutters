@@ -626,6 +626,10 @@
       else if (canPlayVideo) sc.el.play().catch(() => {});
       else timer = setTimeout(next, STILL_MS);
     }).observe(document.getElementById("top"));
+    // Browsers pause muted background video in hidden tabs; resume when the tab is shown again
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && heroVisible && canPlayVideo) scenes[cur].el.play().catch(() => {});
+    });
   }
 </script>
 </body>
