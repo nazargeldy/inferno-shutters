@@ -73,8 +73,6 @@
   .hero > .wrap { position: relative; z-index: 1; }
   .hero-bg .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
   .hero-bg .layer.on { opacity: 1; }
-  .hero-bg img.layer { object-position: center 55%; transform: scale(1.12); }
-  .hero-bg img.layer.on { transform: scale(1.02); transition: opacity 1.4s ease, transform 7s cubic-bezier(.2,.6,.3,1); }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.28) 38%, rgba(0,0,0,.42) 70%, rgba(0,0,0,.85) 100%); }
   .hero .pill { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: rgba(255,255,255,.85); background: rgba(0,0,0,.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 980px; padding: 6px 14px; margin-bottom: 24px; }
   .hero .pill i { width: 7px; height: 7px; border-radius: 50%; background: #ff6a2b; box-shadow: 0 0 0 4px rgba(255,106,43,.25); }
@@ -103,6 +101,12 @@
   .trio p { margin: 0; color: var(--ink-2); font-size: 17px; }
   .glyph { width: 36px; height: 36px; margin-bottom: 18px; color: var(--ink); }
   @media (max-width: 760px) { .trio { grid-template-columns: 1fr; gap: 32px; } }
+
+  .why-photo { margin: 64px auto 0; width: min(var(--wide), 100% - 32px); border-radius: var(--r-lg); overflow: hidden; position: relative; }
+  .why-photo img { width: 100%; height: auto; aspect-ratio: 2000 / 1000; object-fit: cover; object-position: center 55%; transform: scale(1.06); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .why-photo.in img { transform: scale(1); }
+  .why-photo figcaption { position: absolute; left: 20px; bottom: 18px; color: #fff; font-size: 14px; font-weight: 500; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
+  @media (max-width: 700px) { .why-photo { width: 100%; border-radius: 0; margin-top: 44px; } .why-photo img { aspect-ratio: 4 / 3.2; object-position: 58% center; } }
 
   /* STATS */
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
@@ -277,7 +281,7 @@
     .field input, .field textarea { font-size: 16px; }
     footer .wrap { flex-direction: column; }
   }
-  @media (prefers-reduced-motion: reduce) { .fade, .hero .rise { opacity: 1; transform: none; transition: none; } .hero-bg img.layer, .t-photo img { transform: none !important; transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .fade, .hero .rise { opacity: 1; transform: none; transition: none; } .why-photo img, .t-photo img { transform: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
@@ -300,7 +304,7 @@
 <header class="hero center" id="top">
   <div class="hero-bg" aria-hidden="true">
     <video class="layer on" id="storm" muted autoplay playsinline preload="auto" poster="images/storm-poster.jpg"></video>
-    <img class="layer" id="fire" src="images/hero.webp" alt="">
+    <video class="layer" id="fire" muted playsinline preload="metadata" poster="images/fire-poster.jpg"></video>
   </div>
   <div class="wrap">
     <div class="pill rise"><i></i>Malibu Chamber of Commerce · <span data-booth-inline>Booth TBA</span></div>
@@ -339,6 +343,10 @@
       </div>
     </div>
   </div>
+  <figure class="why-photo fade">
+    <img src="images/hero.webp" alt="Modern hillside home with charcoal roll shutters lowered while a wildfire burns on the distant ridge" loading="lazy" width="2000" height="1116">
+    <figcaption>Shutters down. Fire on the ridge.</figcaption>
+  </figure>
 </section>
 
 <section class="mist">
@@ -575,52 +583,48 @@
   }), { threshold: .6 });
   document.querySelectorAll("[data-count]").forEach(el => countIO.observe(el));
 
-  // Hero intro + background: storm footage, then the wildfire scene, on a loop
+  // Hero intro + background: storm footage, then wildfire footage, on a loop
   requestAnimationFrame(() => document.body.classList.add("loaded"));
-  const storm = document.getElementById("storm"), fire = document.getElementById("fire");
+  const small = innerWidth <= 800;
   const label = document.getElementById("scene-label");
-  const dotStorm = document.getElementById("dot-storm"), dotFire = document.getElementById("dot-fire");
-  const FIRE_MS = 6000;
-  const setDot = (on, ms) => {
-    [dotStorm, dotFire].forEach(d => d.classList.remove("on"));
-    void on.offsetWidth; on.style.setProperty("--d", ms + "ms"); on.classList.add("on");
+  const scenes = [
+    { el: document.getElementById("storm"), dot: document.getElementById("dot-storm"), src: small ? "videos/storm-540.mp4" : "videos/storm-1080.mp4", label: "Coastal storm surge" },
+    { el: document.getElementById("fire"),  dot: document.getElementById("dot-fire"),  src: small ? "videos/fire-540.mp4"  : "videos/fire-1080.mp4",  label: "California wildfire" }
+  ];
+  const STILL_MS = 6000;
+  let cur = 0, timer, heroVisible = true, canPlayVideo = true;
+  scenes.forEach(sc => { sc.el.muted = sc.el.defaultMuted = true; sc.el.playsInline = true; sc.el.src = sc.src; });
+  const setDot = (dot, ms) => {
+    scenes.forEach(sc => sc.dot.classList.remove("on"));
+    void dot.offsetWidth; dot.style.setProperty("--d", ms + "ms"); dot.classList.add("on");
   };
-  storm.muted = storm.defaultMuted = true; storm.playsInline = true;
-  storm.src = innerWidth <= 800 ? "videos/storm-540.mp4" : "videos/storm-1080.mp4";
-  let canPlayVideo = true;
-  let fireTimer, heroVisible = true;
-  const showFire = () => {
-    storm.classList.remove("on"); fire.classList.add("on");
-    label.textContent = "Wildfire on the ridge";
-    setDot(dotFire, FIRE_MS);
-    fireTimer = setTimeout(() => { if (heroVisible) playStorm(); }, FIRE_MS);
-  };
-  const playStorm = () => {
-    clearTimeout(fireTimer);
-    fire.classList.remove("on"); storm.classList.add("on");
-    label.textContent = "Coastal storm surge";
-    if (!canPlayVideo) {
-      // Autoplay blocked (e.g. iPhone Low Power Mode): show the storm still, then move on
-      setDot(dotStorm, FIRE_MS);
-      fireTimer = setTimeout(() => { if (heroVisible) showFire(); }, FIRE_MS);
-      return;
-    }
-    storm.currentTime = 0;
-    storm.play().then(() => setDot(dotStorm, (storm.duration || 8.4) * 1000)).catch(err => {
+  const next = () => { if (heroVisible) show((cur + 1) % scenes.length); };
+  const show = i => {
+    clearTimeout(timer);
+    cur = i;
+    const sc = scenes[i];
+    scenes.forEach((o, k) => { o.el.classList.toggle("on", k === i); if (k !== i) o.el.pause(); });
+    label.textContent = sc.label;
+    // preload the following scene while this one plays
+    scenes[(i + 1) % scenes.length].el.preload = "auto";
+    if (!canPlayVideo) { setDot(sc.dot, STILL_MS); timer = setTimeout(next, STILL_MS); return; }
+    sc.el.currentTime = 0;
+    sc.el.play().then(() => setDot(sc.dot, (sc.el.duration || 8) * 1000)).catch(err => {
       if (err && err.name === "AbortError") return;
-      canPlayVideo = false; playStorm();
+      canPlayVideo = false; show(i);   // autoplay blocked (e.g. Low Power Mode): cycle the posters instead
     });
   };
   if (reduceMotion) {
-    fire.classList.add("on"); storm.classList.remove("on"); label.textContent = "";
+    label.textContent = "";
   } else {
-    storm.addEventListener("ended", showFire);
-    playStorm();
+    scenes.forEach(sc => sc.el.addEventListener("ended", next));
+    show(0);
     new IntersectionObserver(([e]) => {
       heroVisible = e.isIntersecting;
-      if (!heroVisible) { storm.pause(); clearTimeout(fireTimer); }
-      else if (storm.classList.contains("on")) storm.play().catch(() => {});
-      else showFire();
+      const sc = scenes[cur];
+      if (!heroVisible) { sc.el.pause(); clearTimeout(timer); }
+      else if (canPlayVideo) sc.el.play().catch(() => {});
+      else timer = setTimeout(next, STILL_MS);
     }).observe(document.getElementById("top"));
   }
 </script>
