@@ -7,7 +7,7 @@
 <meta name="description" content="Fire-resistant roll shutters for California homes. Visit Inferno-Roll at the Malibu Chamber of Commerce.">
 <meta property="og:title" content="Inferno-Roll Shutters — Meet us at the Malibu Chamber">
 <meta property="og:description" content="Protection from embers, heat, wind and intruders. Lowered in seconds.">
-<meta property="og:image" content="https://nazargeldy.github.io/inferno-shutters/images/ss-hero.webp">
+<meta property="og:image" content="https://nazargeldy.github.io/inferno-shutters/images/hero.webp">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231d1d1f%22/><g fill=%22%23f5f5f7%22><rect x=%228%22 y=%229%22 width=%2216%22 height=%222%22 rx=%221%22/><rect x=%228%22 y=%2213%22 width=%2216%22 height=%222%22 rx=%221%22/><rect x=%228%22 y=%2217%22 width=%2216%22 height=%222%22 rx=%221%22/><rect x=%228%22 y=%2221%22 width=%2216%22 height=%222%22 rx=%221%22/></g></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,8 +24,8 @@
     --night: #000;
     --night-ink: #f5f5f7;
     --night-ink-2: #a1a1a6;
-    --r-lg: 28px;
-    --r-md: 18px;
+    --r-lg: 12px;
+    --r-md: 10px;
     --max: 1024px;
     --wide: 1240px;
   }
@@ -73,9 +73,13 @@
   .hero .pill i { width: 7px; height: 7px; border-radius: 50%; background: #ff6a2b; box-shadow: 0 0 0 4px rgba(255,106,43,.18); }
   .hero .sub { color: var(--night-ink-2); max-width: 640px; margin: 18px auto 0; }
   .hero .link-arrow { color: #ff8a50; font-size: 17px; }
-  .hero-media { position: relative; margin: clamp(48px, 7vw, 80px) auto 0; width: min(var(--wide), 100% - 32px); border-radius: var(--r-lg) var(--r-lg) 0 0; overflow: hidden; aspect-ratio: 1920 / 820; }
-  .hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 60%; }
-  @media (max-width: 700px) { .hero-media { aspect-ratio: 4 / 3; } .hero-media img { object-position: 52% center; } }
+  .hero-media { position: relative; margin: clamp(48px, 7vw, 80px) auto 0; width: min(var(--wide), 100% - 32px); border-radius: var(--r-lg) var(--r-lg) 0 0; overflow: hidden; aspect-ratio: 2000 / 1000; }
+  .hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; transform: scale(var(--hz, 1.12)) translateY(var(--hy, 0px)); transition: transform 2.4s cubic-bezier(.16,1,.3,1); will-change: transform; }
+  .loaded .hero-media img { --hz: 1.02; }
+  @media (max-width: 700px) { .hero-media { aspect-ratio: 4 / 3.4; width: 100%; border-radius: 0; } .hero-media img { object-position: 58% center; } }
+  .hero .rise { opacity: 0; transform: translateY(18px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+  .loaded .hero .rise { opacity: 1; transform: none; }
+  .loaded .hero .rise:nth-child(2) { transition-delay: .12s; } .loaded .hero .rise:nth-child(3) { transition-delay: .24s; } .loaded .hero .rise:nth-child(4) { transition-delay: .36s; }
   
   section { padding: clamp(80px, 11vw, 140px) 0; }
   .mist { background: var(--mist); }
@@ -106,7 +110,8 @@
   .tile p { margin: 12px 0 0; color: var(--ink-2); max-width: 420px; }
   .tile .kicker { font-size: 14px; font-weight: 600; color: var(--ink-3); margin-bottom: 10px; letter-spacing: -.005em; }
   .t-fire { grid-column: span 4; min-height: 520px; color: #fff; justify-content: flex-end; background: #000; }
-  .t-fire img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .t-fire img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; transform: scale(1.08); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .t-fire.in img { transform: scale(1); }
   .t-fire::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.92)); z-index: 1; }
   .t-fire > * { position: relative; z-index: 2; }
   .t-fire p, .t-fire .kicker { color: rgba(255,255,255,.78); }
@@ -125,12 +130,6 @@
     .t-fire, .t-wind, .t-sec, .t-energy, .t-ins, .t-quiet { grid-column: span 1; }
   }
 
-  /* SHOWCASE */
-  .showcase { padding: 0 0 8px; background: var(--paper); }
-  .showcase .frame { width: min(var(--wide), 100% - 32px); margin: 0 auto; border-radius: var(--r-lg); overflow: hidden; }
-  .showcase img { width: 100%; aspect-ratio: 1920 / 742; object-fit: cover; }
-  .showcase figcaption { text-align: center; color: var(--ink-3); font-size: 14px; padding: 16px 0 0; }
-  @media (max-width: 600px) { .showcase img { aspect-ratio: 4 / 3; object-position: 55% center; } }
 
   /* MODELS */
   .models { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
@@ -220,7 +219,35 @@
 
   .fade { opacity: 0; transform: translateY(24px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
   .fade.in { opacity: 1; transform: none; }
-  @media (prefers-reduced-motion: reduce) { .fade { opacity: 1; transform: none; transition: none; } }
+  .stat .bar { height: 3px; background: var(--mist); border-radius: 2px; margin-top: 22px; overflow: hidden; }
+  .stat .bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 2px; transition: width 1.8s cubic-bezier(.16,1,.3,1) .2s; }
+  .stat.in .bar i { width: var(--w); }
+  .n, .big { font-variant-numeric: tabular-nums; }
+  /* Phone refinements */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .wrap { width: calc(100% - 40px); }
+    section { padding: 72px 0; }
+    .headline { font-size: 40px; }
+    .hero { padding-top: 48px; }
+    .hero .pill { font-size: 12.5px; }
+    .actions { flex-direction: column; gap: 18px; }
+    .actions .btn { width: 100%; max-width: 320px; min-height: 50px; }
+    .trio { margin-top: 48px; }
+    .stats, .bento, .models { margin-top: 36px; }
+    .stat { padding: 30px 24px; }
+    .tile { padding: 30px 24px; min-height: 0; }
+    .t-fire { min-height: 420px; }
+    .tile .big { padding-top: 22px; }
+    .facts li { flex-direction: column; gap: 2px; }
+    .facts b { text-align: left; }
+    .partner-logos img { height: 28px; }
+    .booth-card .num { font-size: 44px; }
+    form { padding: 26px 20px; }
+    .field input, .field textarea { font-size: 16px; }
+    footer .wrap { flex-direction: column; }
+  }
+  @media (prefers-reduced-motion: reduce) { .fade, .hero .rise { opacity: 1; transform: none; transition: none; } .hero-media img, .t-fire img { transform: none; transition: none; } }
 </style>
 </head>
 <body>
@@ -243,18 +270,18 @@
 
 <header class="hero center" id="top">
   <div class="wrap">
-    <div class="pill"><i></i>Malibu Chamber of Commerce · <span data-booth-inline>Booth TBA</span></div>
-    <h1 class="headline">Your home, sealed<br>in seconds.</h1>
-    <p class="sub">Fire-resistant roll shutters that keep out embers, heat, wind and intruders. One touch, and every opening is protected.</p>
-    <div class="actions">
+    <div class="pill rise"><i></i>Malibu Chamber of Commerce · <span data-booth-inline>Booth TBA</span></div>
+    <h1 class="headline rise">Your home, sealed<br>in seconds.</h1>
+    <p class="sub rise">Fire-resistant roll shutters that keep out embers, heat, wind and intruders. One touch, and every opening is protected.</p>
+    <div class="actions rise">
       <a href="#contact" class="btn btn-primary">Book a free consultation</a>
       <a href="https://www.infernoshutters.com" target="_blank" rel="noopener" class="link-arrow">Visit infernoshutters.com</a>
     </div>
   </div>
   <div class="hero-media">
     <!-- Background video: add videos/hero.mp4 and uncomment.
-    <video autoplay muted loop playsinline poster="images/ss-hero.webp"><source src="videos/hero.mp4" type="video/mp4"></video> -->
-    <img src="images/ss-hero.webp" alt="Home with dark aluminum roll shutters lowered over every window and patio opening">
+    <video autoplay muted loop playsinline poster="images/hero.webp"><source src="videos/hero.mp4" type="video/mp4"></video> -->
+    <img src="images/hero.webp" alt="Modern hillside home with charcoal roll shutters lowered while a wildfire burns on the distant ridge" fetchpriority="high">
   </div>
 </header>
 
@@ -286,9 +313,9 @@
   <div class="wrap">
     <h2 class="title fade">The numbers behind it.</h2>
     <div class="stats">
-      <div class="stat fade"><div class="n">90%</div><p>of homes that ignite in a wildfire are lit by embers.</p><small>Insurance Institute for Business &amp; Home Safety</small></div>
-      <div class="stat fade"><div class="n">150+</div><p>mph wind resistance from rolling shutter systems.</p><small>Sun &amp; Security</small></div>
-      <div class="stat fade"><div class="n">30%</div><p>lower utility bills, up to, with insulated shutters.</p><small>Inferno-Roll</small></div>
+      <div class="stat fade"><div class="n"><span data-count="90">0</span>%</div><p>of homes that ignite in a wildfire are lit by embers.</p><small>Insurance Institute for Business &amp; Home Safety</small><div class="bar"><i style="--w:90%"></i></div></div>
+      <div class="stat fade"><div class="n"><span data-count="150">0</span>+</div><p>mph wind resistance from rolling shutter systems.</p><small>Sun &amp; Security</small><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="stat fade"><div class="n"><span data-count="30">0</span>%</div><p>lower utility bills, up to, with insulated shutters.</p><small>Inferno-Roll</small><div class="bar"><i style="--w:30%"></i></div></div>
     </div>
   </div>
 </section>
@@ -301,7 +328,7 @@
     </div>
     <div class="bento">
       <div class="tile t-fire fade">
-        <img src="images/ss-inferno-roller.webp" alt="Home with closed shutters surrounded by burning embers">
+        <img src="images/fire-tile.webp" alt="Home with every window shuttered as wind-blown embers and spot fires surround it" loading="lazy">
         <div class="kicker">Fire</div>
         <h3>Embers stay outside.</h3>
         <p>Fire-resistant aluminum curtains seal openings against ember intrusion, flames and the radiant heat that cracks glass.</p>
@@ -310,7 +337,7 @@
         <div class="kicker">Storm</div>
         <h3>Built for the wind.</h3>
         <p>Engineered for high winds, flying debris and extreme weather.</p>
-        <div class="big">150+<small> mph</small></div>
+        <div class="big"><span data-count="150">0</span>+<small> mph</small></div>
       </div>
       <div class="tile t-sec fade">
         <div class="kicker">Security</div>
@@ -474,6 +501,33 @@
     if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
   }), { threshold: .12, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll(".fade").forEach(el => io.observe(el));
+
+  // Count numbers up and settle on the exact value
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const countIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, end = +el.dataset.count, dur = 1800, t0 = performance.now();
+    countIO.unobserve(el);
+    if (reduceMotion) { el.textContent = end; return; }
+    const tick = t => {
+      const p = Math.min(1, (t - t0) / dur), eased = 1 - Math.pow(1 - p, 4);
+      el.textContent = Math.round(end * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }), { threshold: .6 });
+  document.querySelectorAll("[data-count]").forEach(el => countIO.observe(el));
+
+  // Hero intro + gentle parallax
+  requestAnimationFrame(() => document.body.classList.add("loaded"));
+  const heroImg = document.querySelector(".hero-media img");
+  if (!reduceMotion && heroImg) {
+    setTimeout(() => heroImg.style.transition = "none", 2500);
+    addEventListener("scroll", () => {
+      const y = Math.min(scrollY, 900);
+      heroImg.style.setProperty("--hy", (y * .08).toFixed(1) + "px");
+    }, { passive: true });
+  }
 
   const form = document.getElementById("lead");
   const err = document.getElementById("form-err");
