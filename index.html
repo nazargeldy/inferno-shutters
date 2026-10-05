@@ -237,7 +237,10 @@
     .stats, .bento, .models { margin-top: 36px; }
     .stat { padding: 30px 24px; }
     .tile { padding: 30px 24px; min-height: 0; }
-    .t-fire { min-height: 420px; }
+    .t-fire { min-height: 0; padding: 0 0 30px; }
+    .t-fire img { position: relative; height: auto; aspect-ratio: 4 / 3; margin-bottom: 26px; }
+    .t-fire::before { display: none; }
+    .t-fire > :not(img) { padding: 0 24px; }
     .tile .big { padding-top: 22px; }
     .facts li { flex-direction: column; gap: 2px; }
     .facts b { text-align: left; }
