@@ -298,7 +298,7 @@
 
 <header class="hero center" id="top">
   <div class="hero-bg" aria-hidden="true">
-    <video class="layer on" id="storm" muted playsinline preload="auto" poster="images/storm-poster.jpg"></video>
+    <video class="layer on" id="storm" muted autoplay playsinline preload="auto" poster="images/storm-poster.jpg"></video>
     <img class="layer" id="fire" src="images/hero.webp" alt="">
   </div>
   <div class="wrap">
@@ -584,7 +584,9 @@
     [dotStorm, dotFire].forEach(d => d.classList.remove("on"));
     void on.offsetWidth; on.style.setProperty("--d", ms + "ms"); on.classList.add("on");
   };
+  storm.muted = storm.defaultMuted = true; storm.playsInline = true;
   storm.src = innerWidth <= 800 ? "videos/storm-540.mp4" : "videos/storm-1080.mp4";
+  let canPlayVideo = true;
   let fireTimer, heroVisible = true;
   const showFire = () => {
     storm.classList.remove("on"); fire.classList.add("on");
@@ -596,8 +598,17 @@
     clearTimeout(fireTimer);
     fire.classList.remove("on"); storm.classList.add("on");
     label.textContent = "Coastal storm surge · Footage: Jonathan Petramala";
+    if (!canPlayVideo) {
+      // Autoplay blocked (e.g. iPhone Low Power Mode): show the storm still, then move on
+      setDot(dotStorm, FIRE_MS);
+      fireTimer = setTimeout(() => { if (heroVisible) showFire(); }, FIRE_MS);
+      return;
+    }
     storm.currentTime = 0;
-    storm.play().then(() => setDot(dotStorm, (storm.duration || 8.4) * 1000)).catch(showFire);
+    storm.play().then(() => setDot(dotStorm, (storm.duration || 8.4) * 1000)).catch(err => {
+      if (err && err.name === "AbortError") return;
+      canPlayVideo = false; playStorm();
+    });
   };
   if (reduceMotion) {
     fire.classList.add("on"); storm.classList.remove("on"); label.textContent = "";
