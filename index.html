@@ -106,8 +106,8 @@
   .tile p { margin: 12px 0 0; color: var(--ink-2); max-width: 420px; }
   .tile .kicker { font-size: 14px; font-weight: 600; color: var(--ink-3); margin-bottom: 10px; letter-spacing: -.005em; }
   .t-fire { grid-column: span 4; min-height: 520px; color: #fff; justify-content: flex-end; background: #000; }
-  .t-fire img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .t-fire::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05) 35%, rgba(0,0,0,.82)); z-index: 1; }
+  .t-fire img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .t-fire::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.92)); z-index: 1; }
   .t-fire > * { position: relative; z-index: 2; }
   .t-fire p, .t-fire .kicker { color: rgba(255,255,255,.78); }
   .t-wind, .t-sec, .t-energy, .t-ins { grid-column: span 2; }
