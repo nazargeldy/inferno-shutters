@@ -131,6 +131,21 @@
   }
 
 
+  /* COASTAL */
+  .coastal { padding-bottom: 0; }
+  .coastal .frame { width: min(var(--wide), 100% - 32px); margin: 56px auto 0; border-radius: var(--r-lg); overflow: hidden; }
+  .coastal .frame img { width: 100%; aspect-ratio: 2000 / 1000; object-fit: cover; object-position: center 60%; transform: scale(1.06); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .coastal .frame.in img { transform: scale(1); }
+  .coastal-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 40px; }
+  .coastal-points h3 { font-size: 19px; margin-bottom: 4px; }
+  .coastal-points p { margin: 0; color: var(--ink-2); font-size: 16px; }
+  @media (max-width: 700px) {
+    .coastal .frame { width: 100%; border-radius: 0; margin-top: 36px; }
+    .coastal .frame img { aspect-ratio: 4 / 3.2; object-position: 40% center; }
+    .coastal-points { grid-template-columns: 1fr; gap: 22px; margin-top: 32px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .coastal .frame img { transform: none; transition: none; } }
+
   /* MODELS */
   .models { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
   .model { padding: 32px 26px 30px; background: var(--mist); border-radius: var(--r-md); }
@@ -364,6 +379,24 @@
   </div>
 </section>
 
+
+<section class="coastal" id="coastal">
+  <div class="wrap center">
+    <div class="eyebrow fade">Coastal living</div>
+    <h2 class="title fade">Disappears by day.<br>Stands guard by night.</h2>
+    <p class="sub fade" style="max-width:640px;margin:16px auto 0">Shutters roll up into slim housings, keeping ocean views and open-air living fully intact. When the wind picks up or the house is empty, one touch closes every opening.</p>
+  </div>
+  <figure class="frame fade">
+    <img src="images/coastal-home.webp" alt="White two-story coastal home with dark roll shutters lowered across the covered patio, beside a pool and lawn facing the ocean" loading="lazy" width="2000" height="1116">
+  </figure>
+  <div class="wrap">
+    <div class="coastal-points">
+      <div class="fade"><h3>Sized for big openings</h3><p>Covers wide sliders and covered patios, not just windows.</p></div>
+      <div class="fade"><h3>Finished to match</h3><p>Standard and custom colors to suit the architecture.</p></div>
+      <div class="fade"><h3>Secure while away</h3><p>Close up a second home in seconds, from anywhere.</p></div>
+    </div>
+  </div>
+</section>
 
 <section id="models">
   <div class="wrap">
