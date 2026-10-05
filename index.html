@@ -68,15 +68,23 @@
   @media (max-width: 760px) { nav ul li:not(:last-child) { display: none; } }
 
   /* HERO */
-  .hero { background: var(--night); color: var(--night-ink); padding: clamp(64px, 9vw, 110px) 0 0; overflow: hidden; }
-  .hero .pill { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: var(--night-ink-2); background: #1c1c1e; border-radius: 980px; padding: 6px 14px; margin-bottom: 24px; }
-  .hero .pill i { width: 7px; height: 7px; border-radius: 50%; background: #ff6a2b; box-shadow: 0 0 0 4px rgba(255,106,43,.18); }
-  .hero .sub { color: var(--night-ink-2); max-width: 640px; margin: 18px auto 0; }
-  .hero .link-arrow { color: #ff8a50; font-size: 17px; }
-  .hero-media { position: relative; margin: clamp(48px, 7vw, 80px) auto 0; width: min(var(--wide), 100% - 32px); border-radius: var(--r-lg) var(--r-lg) 0 0; overflow: hidden; aspect-ratio: 2000 / 1000; }
-  .hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; transform: scale(var(--hz, 1.12)) translateY(var(--hy, 0px)); transition: transform 2.4s cubic-bezier(.16,1,.3,1); will-change: transform; }
-  .loaded .hero-media img { --hz: 1.02; }
-  @media (max-width: 700px) { .hero-media { aspect-ratio: 4 / 3.4; width: 100%; border-radius: 0; } .hero-media img { object-position: 58% center; } }
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center; background: var(--night); color: #fff; overflow: hidden; isolation: isolate; padding: 110px 0 120px; }
+  .hero-bg { position: absolute; inset: 0; z-index: -2; }
+  .hero-bg .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
+  .hero-bg .layer.on { opacity: 1; }
+  .hero-bg img.layer { object-position: center 55%; transform: scale(1.12); }
+  .hero-bg img.layer.on { transform: scale(1.02); transition: opacity 1.4s ease, transform 7s cubic-bezier(.2,.6,.3,1); }
+  .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.28) 38%, rgba(0,0,0,.42) 70%, rgba(0,0,0,.85) 100%); }
+  .hero .pill { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: rgba(255,255,255,.85); background: rgba(0,0,0,.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 980px; padding: 6px 14px; margin-bottom: 24px; }
+  .hero .pill i { width: 7px; height: 7px; border-radius: 50%; background: #ff6a2b; box-shadow: 0 0 0 4px rgba(255,106,43,.25); }
+  .hero .headline { text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+  .hero .sub { color: rgba(255,255,255,.86); max-width: 680px; margin: 18px auto 0; text-shadow: 0 1px 20px rgba(0,0,0,.4); }
+  .hero .link-arrow { color: #fff; font-size: 17px; }
+  .scene { position: absolute; left: 0; right: 0; bottom: 28px; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; width: min(var(--wide), 100% - 40px); margin: 0 auto; font-size: 12px; color: rgba(255,255,255,.7); letter-spacing: 0; }
+  .scene-dots { display: flex; gap: 6px; }
+  .scene-dots i { width: 22px; height: 3px; border-radius: 2px; background: rgba(255,255,255,.3); overflow: hidden; position: relative; }
+  .scene-dots i.on::after { content: ""; position: absolute; inset: 0; background: #fff; transform-origin: left; animation: dot var(--d, 8s) linear forwards; }
+  @keyframes dot { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero .rise { opacity: 0; transform: translateY(18px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
   .loaded .hero .rise { opacity: 1; transform: none; }
   .loaded .hero .rise:nth-child(2) { transition-delay: .12s; } .loaded .hero .rise:nth-child(3) { transition-delay: .24s; } .loaded .hero .rise:nth-child(4) { transition-delay: .36s; }
@@ -109,25 +117,27 @@
   .tile h3 { font-size: clamp(24px, 2.6vw, 32px); line-height: 1.12; }
   .tile p { margin: 12px 0 0; color: var(--ink-2); max-width: 420px; }
   .tile .kicker { font-size: 14px; font-weight: 600; color: var(--ink-3); margin-bottom: 10px; letter-spacing: -.005em; }
-  .t-fire { grid-column: span 4; min-height: 520px; color: #fff; justify-content: flex-end; background: #000; }
-  .t-fire img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; transform: scale(1.08); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
-  .t-fire.in img { transform: scale(1); }
-  .t-fire::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.92)); z-index: 1; }
-  .t-fire > * { position: relative; z-index: 2; }
-  .t-fire p, .t-fire .kicker { color: rgba(255,255,255,.78); }
-  .t-wind, .t-sec, .t-energy, .t-ins { grid-column: span 2; }
+  .t-photo { min-height: 520px; color: #fff; justify-content: flex-end; background: #000; }
+  .t-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; transform: scale(1.08); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .t-photo.in img { transform: scale(1); }
+  .t-photo::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 25%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.92)); z-index: 1; }
+  .t-photo > * { position: relative; z-index: 2; }
+  .t-photo p, .t-photo .kicker { color: rgba(255,255,255,.78); }
+  .t-photo { grid-column: span 3; }
+  .t-sec, .t-energy, .t-ins { grid-column: span 2; }
   .t-quiet { grid-column: span 6; flex-direction: row; align-items: center; gap: 40px; min-height: auto; }
   .tile .big { font-size: clamp(56px, 6vw, 80px); font-weight: 700; letter-spacing: -.045em; line-height: 1; margin-top: auto; padding-top: 28px; }
   .tile .big small { font-size: .35em; letter-spacing: -.02em; }
   @media (max-width: 900px) {
     .bento { grid-template-columns: 1fr 1fr; }
-    .t-fire { grid-column: span 2; min-height: 440px; }
-    .t-wind, .t-sec, .t-energy, .t-ins { grid-column: span 1; }
+    .t-photo { grid-column: span 2; min-height: 440px; }
+    .t-sec, .t-energy { grid-column: span 1; }
+    .t-ins { grid-column: span 2; }
     .t-quiet { grid-column: span 2; flex-direction: column; align-items: flex-start; gap: 0; }
   }
   @media (max-width: 600px) {
     .bento { grid-template-columns: 1fr; }
-    .t-fire, .t-wind, .t-sec, .t-energy, .t-ins, .t-quiet { grid-column: span 1; }
+    .t-photo, .t-sec, .t-energy, .t-ins, .t-quiet { grid-column: span 1; }
   }
 
 
@@ -244,7 +254,8 @@
     .wrap { width: calc(100% - 40px); }
     section { padding: 72px 0; }
     .headline { font-size: 40px; }
-    .hero { padding-top: 48px; }
+    .hero { padding: 96px 0 110px; }
+    .scene { bottom: 20px; font-size: 11px; }
     .hero .pill { font-size: 12.5px; }
     .actions { flex-direction: column; gap: 18px; }
     .actions .btn { width: 100%; max-width: 320px; min-height: 50px; }
@@ -252,10 +263,10 @@
     .stats, .bento, .models { margin-top: 36px; }
     .stat { padding: 30px 24px; }
     .tile { padding: 30px 24px; min-height: 0; }
-    .t-fire { min-height: 0; padding: 0 0 30px; }
-    .t-fire img { position: relative; height: auto; aspect-ratio: 4 / 3; margin-bottom: 26px; }
-    .t-fire::before { display: none; }
-    .t-fire > :not(img) { padding: 0 24px; }
+    .t-photo { min-height: 0; padding: 0 0 30px; }
+    .t-photo img { position: relative; height: auto; aspect-ratio: 4 / 3; margin-bottom: 26px; }
+    .t-photo::before { display: none; }
+    .t-photo > :not(img) { padding: 0 24px; }
     .tile .big { padding-top: 22px; }
     .facts li { flex-direction: column; gap: 2px; }
     .facts b { text-align: left; }
@@ -265,7 +276,7 @@
     .field input, .field textarea { font-size: 16px; }
     footer .wrap { flex-direction: column; }
   }
-  @media (prefers-reduced-motion: reduce) { .fade, .hero .rise { opacity: 1; transform: none; transition: none; } .hero-media img, .t-fire img { transform: none; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .fade, .hero .rise { opacity: 1; transform: none; transition: none; } .hero-bg img.layer, .t-photo img { transform: none !important; transition: none !important; } }
 </style>
 </head>
 <body>
@@ -286,31 +297,34 @@
 </nav>
 
 <header class="hero center" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <video class="layer on" id="storm" muted playsinline preload="auto" poster="images/storm-poster.jpg"></video>
+    <img class="layer" id="fire" src="images/hero.webp" alt="">
+  </div>
   <div class="wrap">
     <div class="pill rise"><i></i>Malibu Chamber of Commerce · <span data-booth-inline>Booth TBA</span></div>
     <h1 class="headline rise">Your home, sealed<br>in seconds.</h1>
-    <p class="sub rise">Fire-resistant roll shutters that keep out embers, heat, wind and intruders. One touch, and every opening is protected.</p>
+    <p class="sub rise">Fire-resistant roll shutters that keep out embers, flames, heat and intruders, as well as the wind, storms and rain of El Niño.</p>
     <div class="actions rise">
       <a href="#contact" class="btn btn-primary">Book a free consultation</a>
       <a href="https://www.infernoshutters.com" target="_blank" rel="noopener" class="link-arrow">Visit infernoshutters.com</a>
     </div>
   </div>
-  <div class="hero-media">
-    <!-- Background video: add videos/hero.mp4 and uncomment.
-    <video autoplay muted loop playsinline poster="images/hero.webp"><source src="videos/hero.mp4" type="video/mp4"></video> -->
-    <img src="images/hero.webp" alt="Modern hillside home with charcoal roll shutters lowered while a wildfire burns on the distant ridge" fetchpriority="high">
+  <div class="scene" aria-hidden="true">
+    <span id="scene-label">Coastal storm surge · Footage: Jonathan Petramala</span>
+    <span class="scene-dots"><i id="dot-storm"></i><i id="dot-fire"></i></span>
   </div>
 </header>
 
 <section id="why">
   <div class="wrap">
     <div class="eyebrow fade">Why now</div>
-    <p class="statement fade">California is preparing. <span>Longer fire seasons, fiercer Santa Ana winds and stronger Pacific storms. For a home, the windows and doors are where it all gets in.</span></p>
+    <p class="statement fade">California is preparing. <span>Fire season is now year-round, Santa Ana winds are fiercer, and El Niño brings stronger Pacific storms. For a home, the windows and doors are where it all gets in.</span></p>
     <div class="trio">
       <div class="fade">
         <svg class="glyph" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 4c1 6 8 9 8 17a8 8 0 0 1-16 0c0-4 2-6 3-8 1 3 3 4 4 4-1-4 0-9 1-13Z"/></svg>
         <h3>Wildfire</h3>
-        <p>Wind-blown embers travel far ahead of the flames and find their way through gaps and broken glass.</p>
+        <p>Embers, flames and radiant heat arrive together. Heat cracks the glass, and once a window breaks, the fire is pulled inside.</p>
       </div>
       <div class="fade">
         <svg class="glyph" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M5 13h17a4 4 0 1 0-4-4"/><path d="M5 19h24a4 4 0 1 1-4 4"/><path d="M5 25h11"/></svg>
@@ -330,9 +344,9 @@
   <div class="wrap">
     <h2 class="title fade">The numbers behind it.</h2>
     <div class="stats">
-      <div class="stat fade"><div class="n"><span data-count="90">0</span>%</div><p>of homes that ignite in a wildfire are lit by embers.</p><small>Insurance Institute for Business &amp; Home Safety</small><div class="bar"><i style="--w:90%"></i></div></div>
+      <div class="stat fade"><div class="n">75–<span data-count="90">0</span>%</div><p>of houses burn when windows break and pull the fire inside. That is exactly what Inferno is designed to stop.</p><small>California State Fire Marshal's Office</small><div class="bar"><i style="--w:90%"></i></div></div>
       <div class="stat fade"><div class="n"><span data-count="150">0</span>+</div><p>mph wind resistance from rolling shutter systems.</p><small>Sun &amp; Security</small><div class="bar"><i style="--w:100%"></i></div></div>
-      <div class="stat fade"><div class="n"><span data-count="12">0</span>+</div><p>years installing roll shutters across the West.</p><small>Sun &amp; Security</small><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="stat fade"><div class="n"><span data-count="12">0</span>+</div><p>years installing roll shutters across North America.</p><small>Sun &amp; Security</small><div class="bar"><i style="--w:100%"></i></div></div>
     </div>
   </div>
 </section>
@@ -344,17 +358,17 @@
       <h2 class="title fade">Protection for every season.</h2>
     </div>
     <div class="bento">
-      <div class="tile t-fire fade">
+      <div class="tile t-photo fade">
         <img src="images/fire-tile.webp" alt="Home with every window shuttered as wind-blown embers and spot fires surround it" loading="lazy">
         <div class="kicker">Fire</div>
-        <h3>Embers stay outside.</h3>
-        <p>Fire-resistant aluminum curtains seal openings against ember intrusion, flames and the radiant heat that cracks glass.</p>
+        <h3>Flames stay outside.</h3>
+        <p>Keeps out embers and all flames, and blocks most of the radiant heat. Whatever heat gets through is nowhere near hot enough to ignite anything inside the house.</p>
       </div>
-      <div class="tile t-wind fade">
+      <div class="tile t-photo fade">
+        <img src="images/storm-tile.jpg" alt="Storm waves crashing over beachfront homes at sunset" loading="lazy">
         <div class="kicker">Storm</div>
         <h3>Built for the wind.</h3>
-        <p>Engineered for high winds, flying debris and extreme weather.</p>
-        <div class="big"><span data-count="150">0</span>+<small> mph</small></div>
+        <p>Engineered for high winds, flying debris and the wind-driven rain of El Niño storms. Rated to 150+ mph.</p>
       </div>
       <div class="tile t-sec fade">
         <div class="kicker">Security</div>
@@ -444,15 +458,16 @@
         <img src="images/ss-logo.webp" alt="Sun and Security" style="mix-blend-mode:multiply">
       </div>
       <h2 class="title fade">Wildfire science, backed by a decade of craft.</h2>
-      <p class="sub fade" style="margin-top:16px">Inferno-Roll is powered by Sun &amp; Security, which has been installing shutters across the West for more than twelve years.</p>
+      <p class="sub fade" style="margin-top:16px">Inferno-Roll is powered by Sun &amp; Security, which has been installing shutters across North America for more than twelve years.</p>
     </div>
     <ul class="facts fade">
       <li><span>Experience</span><b>12+ years</b></li>
-      <li><span>California offices</span><b>Los Angeles · San Francisco · Sacramento</b></li>
-      <li><span>Warranty</span><b>Lifetime craftsmanship promise</b></li>
+      <li><span>Locations</span><b>Los Angeles · San Francisco · Sacramento · Monterey / Pebble Beach · Arizona</b></li>
+      <li><span>Limited warranty</span><b>Lifetime craftsmanship promise</b></li>
       <li><span>Financing</span><b>Up to 100% available</b></li>
       <li><span>Fire testing</span><b>Tested at Western Fire Center</b></li>
-      <li><span>Bushfire rating</span><b>heroal stainless-steel system: BAL-FZ &amp; BAL-40 (AS 1530.8.2)</b></li>
+      <li><span>Bushfire rating</span><b>Stainless-steel system: BAL-FZ &amp; BAL-40 (AS 1530.8.2)</b></li>
+      <li><span>Automatic deployment</span><b>Closes on its own at around 180°F in the shade</b></li>
       <li><span>Manufacturing</span><b>Made in the USA</b></li>
     </ul>
   </div>
@@ -517,7 +532,7 @@
 
 <footer>
   <div class="wrap">
-    <p class="src">Sources: Insurance Institute for Business &amp; Home Safety (ember ignition research); California Department of Insurance, <em>Safer from Wildfires</em>; wind rating and installation history from Sun &amp; Security; BAL-FZ / BAL-40 rating from heroal bushfire protection systems documentation.</p>
+    <p class="src">Sources: California State Fire Marshal's Office (window failure in wildfires); California Department of Insurance, <em>Safer from Wildfires</em>; wind rating and installation history from Sun &amp; Security; BAL-FZ / BAL-40 tested to AS 1530.8.2. Storm footage © Jonathan Petramala, used with permission.</p>
     <p>© 2026 Inferno-Roll Shutters. Powered by Sun &amp; Security.</p>
     <p><a href="https://www.infernoshutters.com" target="_blank" rel="noopener">infernoshutters.com</a> · <a href="tel:+18889998809">(888) 999-8809</a></p>
   </div>
@@ -559,67 +574,43 @@
   }), { threshold: .6 });
   document.querySelectorAll("[data-count]").forEach(el => countIO.observe(el));
 
-  // Hero intro + gentle parallax
+  // Hero intro + background: storm footage, then the wildfire scene, on a loop
   requestAnimationFrame(() => document.body.classList.add("loaded"));
-  const heroImg = document.querySelector(".hero-media img");
-  if (!reduceMotion && heroImg) {
-    setTimeout(() => heroImg.style.transition = "none", 2500);
-    addEventListener("scroll", () => {
-      const y = Math.min(scrollY, 900);
-      heroImg.style.setProperty("--hy", (y * .08).toFixed(1) + "px");
-    }, { passive: true });
+  const storm = document.getElementById("storm"), fire = document.getElementById("fire");
+  const label = document.getElementById("scene-label");
+  const dotStorm = document.getElementById("dot-storm"), dotFire = document.getElementById("dot-fire");
+  const FIRE_MS = 6000;
+  const setDot = (on, ms) => {
+    [dotStorm, dotFire].forEach(d => d.classList.remove("on"));
+    void on.offsetWidth; on.style.setProperty("--d", ms + "ms"); on.classList.add("on");
+  };
+  storm.src = innerWidth <= 800 ? "videos/storm-540.mp4" : "videos/storm-1080.mp4";
+  let fireTimer, heroVisible = true;
+  const showFire = () => {
+    storm.classList.remove("on"); fire.classList.add("on");
+    label.textContent = "Wildfire on the ridge";
+    setDot(dotFire, FIRE_MS);
+    fireTimer = setTimeout(() => { if (heroVisible) playStorm(); }, FIRE_MS);
+  };
+  const playStorm = () => {
+    clearTimeout(fireTimer);
+    fire.classList.remove("on"); storm.classList.add("on");
+    label.textContent = "Coastal storm surge · Footage: Jonathan Petramala";
+    storm.currentTime = 0;
+    storm.play().then(() => setDot(dotStorm, (storm.duration || 8.4) * 1000)).catch(showFire);
+  };
+  if (reduceMotion) {
+    fire.classList.add("on"); storm.classList.remove("on"); label.textContent = "";
+  } else {
+    storm.addEventListener("ended", showFire);
+    playStorm();
+    new IntersectionObserver(([e]) => {
+      heroVisible = e.isIntersecting;
+      if (!heroVisible) { storm.pause(); clearTimeout(fireTimer); }
+      else if (storm.classList.contains("on")) storm.play().catch(() => {});
+      else showFire();
+    }).observe(document.getElementById("top"));
   }
-
-  const form = document.getElementById("lead");
-  const err = document.getElementById("form-err");
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const fd = new FormData(form);
-    const name = (fd.get("name") || "").trim(), email = (fd.get("email") || "").trim();
-    if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
-      err.textContent = "Please enter your name and a valid email."; err.style.display = "block"; return;
-    }
-    err.style.display = "none";
-    const btn = form.querySelector("button");
-    btn.disabled = true; btn.textContent = "Sending…";
-    const data = {
-      name, email,
-      phone: fd.get("phone") || "",
-      city: fd.get("city") || "",
-      interests: fd.getAll("interest").join(", ") || "—",
-      message: fd.get("message") || "",
-      visiting_booth: fd.get("booth_visit") ? "Yes" : "Not sure",
-      _honey: fd.get("_honey") || "",
-      _subject: "New Malibu Chamber lead: " + name,
-      _template: "table"
-    };
-    try {
-      let r;
-      if (HUBSPOT_FORM_GUID) {
-        const [firstname, ...rest] = name.split(/\s+/);
-        const note = [data.message, "Interests: " + data.interests, "Visiting booth: " + data.visiting_booth].filter(Boolean).join("\n");
-        const fields = { firstname, lastname: rest.join(" "), email, phone: data.phone, city: data.city, message: note };
-        const hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1];
-        r = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL}/${HUBSPOT_FORM_GUID}`, {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            fields: Object.entries(fields).filter(([, v]) => v).map(([name, value]) => ({ name, value })),
-            context: { pageUri: location.href, pageName: document.title, ...(hutk && { hutk }) }
-          })
-        });
-      } else {
-        r = await fetch("https://formsubmit.co/ajax/" + LEAD_EMAIL, {
-          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data)
-        });
-      }
-      if (!r.ok) throw new Error();
-      document.getElementById("form-body").style.display = "none";
-      document.getElementById("form-ok").style.display = "block";
-    } catch {
-      err.innerHTML = 'Something went wrong. Please call David at <a href="tel:+17073374144">(707) 337-4144</a> or email <a href="mailto:' + LEAD_EMAIL + '">' + LEAD_EMAIL + '</a>.';
-      err.style.display = "block"; btn.disabled = false; btn.textContent = "Request a consultation";
-    }
-  });
 </script>
 </body>
 </html>
