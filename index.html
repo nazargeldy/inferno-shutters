@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inferno-Roll Shutters · Malibu Chamber</title>
+<meta name="description" content="Fire, storm and security shutters for Malibu homes. Visit the Inferno-Roll booth at the Malibu Chamber of Commerce event.">
+<meta property="og:title" content="Inferno-Roll Shutters — Visit Our Booth at the Malibu Chamber">
+<meta property="og:description" content="California is preparing for wildfire, storms and rising water. See fire-resistant roll shutters in person.">
+<meta property="og:image" content="images/hero-inferno-roll.webp">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0806;
+    --bg-2: #140e0a;
+    --card: #1b130e;
+    --line: rgba(255, 150, 80, .16);
+    --text: #f6efe9;
+    --muted: #b9a89b;
+    --fire: #ff5a1f;
+    --fire-2: #ffb02e;
+    --storm: #4fb3ff;
+    --grad: linear-gradient(100deg, #ff3d00, #ff7a1a 45%, #ffc53d);
+    --radius: 18px;
+    --max: 1180px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 Inter, system-ui, sans-serif; overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: Oswald, Impact, sans-serif; letter-spacing: .5px; line-height: 1.08; margin: 0 0 .5em; text-transform: uppercase; }
+  .wrap { width: min(var(--max), 100% - 32px); margin-inline: auto; }
+  .fire-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .eyebrow { display: inline-block; font: 600 13px/1 Inter; letter-spacing: 3px; text-transform: uppercase; color: var(--fire-2); margin-bottom: 18px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 999px;
+    font-weight: 700; text-decoration: none; transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .btn-fire { background: var(--grad); color: #1a0a00; box-shadow: 0 10px 40px -10px rgba(255, 90, 31, .8); }
+  .btn-fire:hover { transform: translateY(-2px); box-shadow: 0 16px 50px -10px rgba(255, 90, 31, 1); }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,.35); color: #fff; backdrop-filter: blur(6px); }
+  .btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+  /* NAV */
+  nav {
+    position: fixed; inset: 0 0 auto; z-index: 50; transition: background .3s, padding .3s;
+    padding: 18px 0;
+  }
+  nav.scrolled { background: rgba(11, 8, 6, .86); backdrop-filter: blur(12px); padding: 10px 0; border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .logo { background: #fff; border-radius: 10px; padding: 6px 12px; display: inline-flex; }
+  .logo img { height: 34px; width: auto; }
+  nav .links { display: flex; gap: 26px; align-items: center; }
+  nav .links a { text-decoration: none; font-weight: 500; font-size: 15px; opacity: .85; }
+  nav .links a:hover { opacity: 1; color: var(--fire-2); }
+  nav .links .btn { padding: 10px 18px; font-size: 14px; opacity: 1; }
+  @media (max-width: 860px) { nav .links a:not(.btn) { display: none; } }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100svh; display: grid; place-items: center; overflow: hidden; isolation: isolate; }
+  .hero-media, .hero-media video, .hero-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-media img { animation: kenburns 24s ease-in-out infinite alternate; }
+  @keyframes kenburns { from { transform: scale(1.04); } to { transform: scale(1.16) translate(-1.5%, -1%); } }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: 1;
+    background:
+      radial-gradient(ellipse at 50% 120%, rgba(255, 70, 0, .35), transparent 60%),
+      linear-gradient(180deg, rgba(11,8,6,.55) 0%, rgba(11,8,6,.45) 40%, rgba(11,8,6,.95) 100%);
+  }
+  #embers { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+  .hero-content { position: relative; z-index: 3; text-align: center; padding: 140px 0 110px; }
+  .hero h1 { font-size: clamp(42px, 8vw, 104px); margin-bottom: 18px; text-shadow: 0 6px 40px rgba(0,0,0,.6); }
+  .hero p.lead { font-size: clamp(17px, 2vw, 21px); max-width: 760px; margin: 0 auto 34px; color: #f1e2d6; }
+  .hero .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .booth-badge {
+    display: inline-flex; align-items: center; gap: 12px; margin-bottom: 26px; padding: 10px 18px 10px 10px;
+    border-radius: 999px; background: rgba(0,0,0,.45); border: 1px solid rgba(255, 176, 46, .45); backdrop-filter: blur(8px);
+    font-weight: 600; font-size: 14px;
+  }
+  .booth-badge b { background: var(--grad); color: #1a0a00; padding: 6px 12px; border-radius: 999px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  .scroll-cue { position: absolute; bottom: 26px; left: 50%; z-index: 3; transform: translateX(-50%); width: 26px; height: 42px; border: 2px solid rgba(255,255,255,.5); border-radius: 14px; }
+  .scroll-cue::after { content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: #fff; animation: cue 1.8s infinite; }
+  @keyframes cue { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
+
+  /* TICKER */
+  .ticker { background: var(--grad); color: #1a0a00; overflow: hidden; white-space: nowrap; font: 700 15px/1 Oswald, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+  .ticker div { display: inline-block; padding: 16px 0; animation: tick 38s linear infinite; }
+  .ticker span { margin: 0 28px; }
+  @keyframes tick { to { transform: translateX(-50%); } }
+
+  section { padding: clamp(72px, 10vw, 130px) 0; position: relative; }
+  .section-head { max-width: 760px; margin-bottom: 54px; }
+  .section-head h2 { font-size: clamp(34px, 5vw, 58px); }
+  .section-head p { color: var(--muted); font-size: 18px; margin: 0; }
+  .center { text-align: center; margin-inline: auto; }
+
+  /* WHY NOW */
+  .why { background: radial-gradient(ellipse at 0% 0%, rgba(79,179,255,.10), transparent 50%), radial-gradient(ellipse at 100% 100%, rgba(255,90,31,.12), transparent 50%), var(--bg-2); }
+  .why-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; }
+  .why-img { position: relative; border-radius: var(--radius); overflow: hidden; box-shadow: 0 30px 80px -20px rgba(255, 70, 0, .45); }
+  .why-img img { width: 100%; aspect-ratio: 557/340; object-fit: cover; }
+  .why-img figcaption { position: absolute; left: 16px; bottom: 16px; padding: 8px 14px; border-radius: 999px; background: rgba(0,0,0,.6); font-size: 13px; }
+  .threats { display: grid; gap: 14px; margin-top: 26px; }
+  .threat { display: flex; gap: 16px; padding: 18px 20px; border-radius: 14px; background: rgba(255,255,255,.03); border: 1px solid var(--line); }
+  .threat .ic { flex: none; width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font-size: 22px; }
+  .threat.fire .ic { background: rgba(255, 90, 31, .16); }
+  .threat.water .ic { background: rgba(79, 179, 255, .16); }
+  .threat.wind .ic { background: rgba(200, 200, 220, .12); }
+  .threat h3 { font-size: 19px; margin: 0 0 2px; }
+  .threat p { margin: 0; color: var(--muted); font-size: 15px; }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .stat { background: var(--bg); padding: 36px 26px; text-align: center; }
+  .stat .num { font: 700 clamp(40px, 5vw, 60px)/1 Oswald, sans-serif; }
+  .stat p { margin: 10px 0 0; color: var(--muted); font-size: 14.5px; }
+  .stat small { display: block; margin-top: 6px; color: #7d6d61; font-size: 12px; }
+  @media (max-width: 860px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* BENEFITS */
+  .benefits { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .benefit {
+    position: relative; padding: 30px 26px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--line);
+    transition: transform .3s, border-color .3s;
+  }
+  .benefit:hover { transform: translateY(-6px); border-color: rgba(255, 140, 50, .5); }
+  .benefit .ic { font-size: 30px; margin-bottom: 14px; }
+  .benefit h3 { font-size: 22px; }
+  .benefit p { margin: 0; color: var(--muted); font-size: 15.5px; }
+  @media (max-width: 960px) { .benefits { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .benefits { grid-template-columns: 1fr; } }
+
+  /* PRODUCTS */
+  .products { background: var(--bg-2); }
+  .models { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 60px; }
+  .model { border-radius: var(--radius); overflow: hidden; background: var(--card); border: 1px solid var(--line); }
+  .model img { aspect-ratio: 4/3; object-fit: cover; width: 100%; transition: transform .5s; }
+  .model:hover img { transform: scale(1.06); }
+  .model div { padding: 18px 20px 22px; }
+  .model h3 { font-size: 24px; margin-bottom: 4px; }
+  .model p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  @media (max-width: 960px) { .models { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .models { grid-template-columns: 1fr; } }
+  .lines { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .line-card { position: relative; border-radius: var(--radius); overflow: hidden; min-height: 340px; display: flex; align-items: flex-end; }
+  .line-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+  .line-card:hover img { transform: scale(1.06); }
+  .line-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(8,5,3,.95)); }
+  .line-card div { position: relative; z-index: 1; padding: 24px; }
+  .line-card h3 { font-size: 24px; margin-bottom: 6px; }
+  .line-card p { margin: 0; color: #d9cabe; font-size: 15px; }
+  @media (max-width: 900px) { .lines { grid-template-columns: 1fr; } }
+
+  /* PARTNERS */
+  .partners-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .partner-logos { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin: 26px 0; }
+  .partner-logos .chip { background: #fff; border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; }
+  .partner-logos .chip img { height: 40px; width: auto; }
+  .partner-logos .x { font: 600 28px Oswald; color: var(--fire-2); }
+  .checks { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+  .checks li { padding-left: 34px; position: relative; color: #e6d8cc; }
+  .checks li::before { content: "✓"; position: absolute; left: 0; top: 1px; width: 22px; height: 22px; border-radius: 50%; background: var(--grad); color: #1a0a00; font-weight: 800; font-size: 13px; display: grid; place-items: center; }
+  .map { border-radius: var(--radius); overflow: hidden; background: #fff; padding: 14px; }
+  @media (max-width: 900px) { .partners-grid { grid-template-columns: 1fr; } }
+
+  /* GALLERY */
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 14px; filter: saturate(1.05); transition: transform .4s, filter .4s; }
+  .gallery img:hover { transform: scale(1.02); filter: saturate(1.25); }
+  @media (max-width: 700px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+
+  /* BOOTH */
+  .booth { overflow: hidden; }
+  .booth-card {
+    position: relative; border-radius: 28px; padding: clamp(36px, 6vw, 72px); overflow: hidden;
+    background: radial-gradient(ellipse at 85% 0%, rgba(255, 176, 46, .35), transparent 55%), radial-gradient(ellipse at 0% 100%, rgba(255, 61, 0, .45), transparent 55%), #1a0d06;
+    border: 1px solid rgba(255, 140, 50, .4);
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center;
+  }
+  .booth-card h2 { font-size: clamp(36px, 5.5vw, 64px); }
+  .booth-card p { color: #ecdccf; font-size: 18px; }
+  .booth-num {
+    text-align: center; border-radius: 22px; padding: 34px 20px; background: rgba(0,0,0,.4); border: 1px dashed rgba(255, 176, 46, .6);
+  }
+  .booth-num .label { font: 600 13px Inter; letter-spacing: 3px; text-transform: uppercase; color: var(--fire-2); }
+  .booth-num .n { font: 700 clamp(64px, 10vw, 120px)/1 Oswald; margin: 10px 0; }
+  .booth-num .sub { color: var(--muted); font-size: 14px; }
+  @media (max-width: 860px) { .booth-card { grid-template-columns: 1fr; } }
+
+  /* CONTACT */
+  .contact { background: var(--bg-2); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .david { display: flex; gap: 20px; align-items: center; margin-bottom: 26px; }
+  .avatar { width: 84px; height: 84px; border-radius: 50%; background: var(--grad); display: grid; place-items: center; font: 700 36px Oswald; color: #1a0a00; flex: none; }
+  .david h3 { font-size: 28px; margin: 0; }
+  .david p { margin: 2px 0 0; color: var(--muted); }
+  .contact-list { display: grid; gap: 14px; }
+  .contact-item { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .2s, transform .2s; }
+  .contact-item:hover { border-color: var(--fire); transform: translateX(4px); }
+  .contact-item .ic { font-size: 22px; }
+  .contact-item small { display: block; color: var(--muted); font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase; }
+  .contact-item strong { font-size: 18px; }
+  @media (max-width: 860px) { .contact-grid { grid-template-columns: 1fr; } }
+
+  footer { padding: 40px 0; border-top: 1px solid var(--line); color: #8a7a6e; font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--fire-2); }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+    .hero-media img, .ticker div { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Inferno-Roll Shutters"><img src="images/logo-inferno.png" alt="Inferno-Roll Shutters"></a>
+    <div class="links">
+      <a href="#why">Why Now</a>
+      <a href="#benefits">Benefits</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+      <a href="#booth" class="btn btn-fire">Visit Our Booth</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-media">
+    <!-- To add a background video later, drop a file at videos/hero.mp4 and uncomment:
+    <video autoplay muted loop playsinline poster="images/hero-inferno-roll.webp"><source src="videos/hero.mp4" type="video/mp4"></video>
+    -->
+    <img src="images/hero-inferno-roll.webp" alt="Modern California home sealed with Inferno-Roll shutters as wildfire burns on the hillside">
+  </div>
+  <canvas id="embers"></canvas>
+  <div class="wrap hero-content">
+    <div class="booth-badge"><b>Malibu Chamber</b> Come see us at <span class="booth-label">Booth #TBA</span></div>
+    <h1>When fire &amp; storms come,<br><span class="fire-text">your home stays sealed.</span></h1>
+    <p class="lead">California is preparing for longer wildfire seasons, stronger storms and rising water. Inferno-Roll fire-resistant roll shutters guard every window and door against embers, radiant heat, wind and intruders — at the touch of a button.</p>
+    <div class="ctas">
+      <a href="#booth" class="btn btn-fire">🔥 Visit Our Booth</a>
+      <a href="https://www.infernoshutters.com" target="_blank" rel="noopener" class="btn btn-ghost">InfernoShutters.com →</a>
+    </div>
+  </div>
+  <a href="#why" class="scroll-cue" aria-label="Scroll down"></a>
+</header>
+
+<div class="ticker" aria-hidden="true"><div>
+  <span>🔥 Ember Protection</span><span>🌡 Radiant Heat Shield</span><span>🌪 150+ MPH Wind Rated</span><span>🌊 Storm Ready</span><span>🔒 Break-In Resistant</span><span>⚡ Up to 30% Energy Savings</span><span>🇺🇸 Made in the USA</span>
+  <span>🔥 Ember Protection</span><span>🌡 Radiant Heat Shield</span><span>🌪 150+ MPH Wind Rated</span><span>🌊 Storm Ready</span><span>🔒 Break-In Resistant</span><span>⚡ Up to 30% Energy Savings</span><span>🇺🇸 Made in the USA</span>
+</div></div>
+
+<section class="why" id="why">
+  <div class="wrap why-grid">
+    <figure class="why-img reveal" style="margin:0">
+      <img src="images/ss-inferno-roller.webp" alt="Home with closed fire shutters surrounded by burning embers">
+      <figcaption>Shutters down. Embers out.</figcaption>
+    </figure>
+    <div class="reveal">
+      <span class="eyebrow">Why now</span>
+      <h2>California is <span class="fire-text">preparing.</span> Is your home?</h2>
+      <p style="color:var(--muted);font-size:18px;margin:0">Malibu knows better than anywhere what a wind-driven fire can do. Add atmospheric-river storms, king tides and rising coastal water, and the windows and doors of your home become its weakest point. Hardening them is one of the most effective steps a homeowner can take.</p>
+      <div class="threats">
+        <div class="threat fire"><div class="ic">🔥</div><div><h3>Wildfire &amp; Embers</h3><p>Most homes lost to wildfire are ignited by wind-blown embers, not the flame front.</p></div></div>
+        <div class="threat wind"><div class="ic">🌪</div><div><h3>Santa Ana Winds</h3><p>High winds hurl debris that shatters glass and lets fire and weather inside.</p></div></div>
+        <div class="threat water"><div class="ic">🌊</div><div><h3>Storms &amp; Rising Water</h3><p>Stronger Pacific storms and rising seas put coastal homes under new pressure.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><div class="num fire-text"><span data-count="90">0</span>%</div><p>of wildfire home ignitions are caused by embers</p><small>Source: IBHS</small></div>
+      <div class="stat"><div class="num fire-text"><span data-count="150">0</span>+</div><p>MPH wind resistance for rolling shutters</p><small>Source: Sun &amp; Security</small></div>
+      <div class="stat"><div class="num fire-text">Up to <span data-count="30">0</span>%</div><p>lower utility bills with insulated shutters</p><small>Source: Inferno-Roll</small></div>
+      <div class="stat"><div class="num fire-text"><span data-count="12">0</span>+</div><p>years protecting homes &amp; businesses</p><small>Sun &amp; Security</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="benefits" style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">One system · Every threat</span>
+      <h2>Why homeowners choose <span class="fire-text">roll shutters</span></h2>
+      <p>One investment that protects against fire, storm, intruders, heat and noise — 365 days a year.</p>
+    </div>
+    <div class="benefits">
+      <div class="benefit reveal"><div class="ic">🔥</div><h3>Ember &amp; Heat Defense</h3><p>Fire-resistant curtains seal windows and doors against ember intrusion, flames and radiant heat that can crack glass.</p></div>
+      <div class="benefit reveal"><div class="ic">🌪</div><h3>Storm &amp; Wind Protection</h3><p>Engineered for high winds, flying debris and extreme weather — rated to withstand winds of 150+ mph.</p></div>
+      <div class="benefit reveal"><div class="ic">🔒</div><h3>Security</h3><p>Reinforced aluminum slats create a visible deterrent and a physical barrier that is difficult to breach.</p></div>
+      <div class="benefit reveal"><div class="ic">⚡</div><h3>Energy Savings</h3><p>Insulated slats block up to 90% of solar heat gain and can cut utility bills by up to 30%.</p></div>
+      <div class="benefit reveal"><div class="ic">🛡</div><h3>Insurance-Ready Hardening</h3><p>California's <em>Safer from Wildfires</em> framework recognizes window protection like shutters as part of a hardened home.</p></div>
+      <div class="benefit reveal"><div class="ic">🔇</div><h3>Privacy &amp; Quiet</h3><p>Reduce outside noise by up to 50%, darken rooms completely and enjoy total privacy on demand.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="products">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Fire-resistant models</span>
+      <h2>The Inferno-Roll <span class="fire-text">lineup</span></h2>
+      <p>Patent-pending, proudly made in the United States, and built for long-term performance. Motorized with one-touch operation.</p>
+    </div>
+    <div class="models">
+      <div class="model reveal"><img src="images/model-i4000.png" alt="Inferno-Roll I 4000 shutter"><div><h3>I 4000</h3><p>Roll-formed aluminum with regular-density foam filling.</p></div></div>
+      <div class="model reveal"><img src="images/model-i4400.png" alt="Inferno-Roll I 4400 shutter"><div><h3>I 4400</h3><p>Roll-formed aluminum with an ultra-hard resin core.</p></div></div>
+      <div class="model reveal"><img src="images/model-i4500.png" alt="Inferno-Roll I 4500 shutter"><div><h3>I 4500</h3><p>Double-wall extruded aluminum for maximum strength.</p></div></div>
+      <div class="model reveal"><img src="images/model-i5600.png" alt="Inferno-Roll I 5600 shutter"><div><h3>I 5600</h3><p>Single-wall extruded aluminum — lean, tough, durable.</p></div></div>
+    </div>
+    <div class="lines">
+      <div class="line-card reveal"><img src="images/ss-inferno-roller.webp" alt=""><div><h3>Inferno Roller Shutters</h3><p>Premium fire-resistant protection for wildfire-zone homes.</p></div></div>
+      <div class="line-card reveal"><img src="images/ss-rolling-security.webp" alt=""><div><h3>Rolling Security Shutters</h3><p>Motorized storm and break-in protection.</p></div></div>
+      <div class="line-card reveal"><img src="images/ss-screens.webp" alt=""><div><h3>Retractable Screens</h3><p>Sun and insect control that disappears when not in use.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="wrap partners-grid">
+    <div class="reveal">
+      <span class="eyebrow">Powered by Sun &amp; Security</span>
+      <h2>Wildfire science meets <span class="fire-text">a decade of craft</span></h2>
+      <div class="partner-logos">
+        <span class="chip"><img src="images/logo-inferno.png" alt="Inferno-Roll Shutters"></span>
+        <span class="x">×</span>
+        <span class="chip"><img src="images/ss-logo.webp" alt="Sun and Security"></span>
+      </div>
+      <ul class="checks">
+        <li>12+ years installing shutters across Arizona, California and beyond</li>
+        <li>Offices in Los Angeles, San Francisco and Sacramento</li>
+        <li>Lifetime craftsmanship promise on every installation</li>
+        <li>100% financing available</li>
+        <li>Certifications listed by Inferno-Roll: CAL FIRE, Intertek, UL, CLCA</li>
+      </ul>
+    </div>
+    <div class="map reveal"><img src="images/wildfire-zones.png" alt="California wildfire hazard zones map"></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Real installations</span><h2>Built for <span class="fire-text">real homes</span></h2></div>
+    <div class="gallery reveal">
+      <img src="images/g-cabin.webp" alt="Cabin with rolling shutters installed">
+      <img src="images/g-vincent.webp" alt="Home with shutters down">
+      <img src="images/g-lang.webp" alt="Windows with roll shutters">
+      <img src="images/g-jay.webp" alt="Exterior rolling shutter">
+      <img src="images/g-interior.webp" alt="Interior view of security shutters">
+      <img src="images/g-odyssey.webp" alt="Rolling shutter installation">
+    </div>
+  </div>
+</section>
+
+<section class="booth" id="booth">
+  <div class="wrap">
+    <div class="booth-card reveal">
+      <div>
+        <span class="eyebrow">Malibu Chamber of Commerce</span>
+        <h2>Come see it. <span class="fire-text">Touch it.</span> Ask David.</h2>
+        <p>We're bringing Inferno-Roll shutters to the Malibu Chamber event. Stop by our booth to see the slats up close, watch a live demo, and get a free protection consultation for your home or business.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:26px">
+          <a href="tel:8889998809" class="btn btn-fire">📞 (888) 999-8809</a>
+          <a href="mailto:david@infernoshutters.com?subject=Malibu%20Chamber%20booth" class="btn btn-ghost">✉ Email David</a>
+        </div>
+      </div>
+      <div class="booth-num">
+        <div class="label">Find us at</div>
+        <div class="n fire-text booth-number">TBA</div>
+        <div class="sub">Booth number coming soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Talk to the shutter guy</span>
+      <h2>Protect your home <span class="fire-text">before</span> the next season</h2>
+      <p style="color:var(--muted);font-size:18px">Get a free quote, ask about financing, or book a home assessment.</p>
+    </div>
+    <div class="reveal">
+      <div class="david">
+        <div class="avatar">D</div>
+        <div><h3>David</h3><p>Inferno-Roll Shutters</p></div>
+      </div>
+      <div class="contact-list">
+        <a class="contact-item" href="tel:8889998809"><span class="ic">📞</span><span><small>Call</small><strong>(888) 999-8809</strong></span></a>
+        <a class="contact-item" href="mailto:david@infernoshutters.com"><span class="ic">✉</span><span><small>Email</small><strong>david@infernoshutters.com</strong></span></a>
+        <a class="contact-item" href="https://www.infernoshutters.com" target="_blank" rel="noopener"><span class="ic">🌐</span><span><small>Website</small><strong>InfernoShutters.com</strong></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Inferno-Roll Shutters · Powered by Sun &amp; Security</span>
+    <a href="https://www.infernoshutters.com" target="_blank" rel="noopener">www.infernoshutters.com</a>
+  </div>
+</footer>
+
+<script>
+  // ---- Set the booth number here once it's confirmed ----
+  const BOOTH = "TBA";
+  document.querySelectorAll(".booth-number").forEach(el => el.textContent = BOOTH === "TBA" ? "TBA" : "#" + BOOTH);
+  document.querySelectorAll(".booth-label").forEach(el => el.textContent = "Booth #" + BOOTH);
+  if (BOOTH !== "TBA") document.querySelectorAll(".booth-num .sub").forEach(el => el.textContent = "Malibu Chamber of Commerce");
+
+  // Nav background on scroll
+  const nav = document.getElementById("nav");
+  addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 40), { passive: true });
+
+  // Reveal + count-up
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add("in");
+    e.target.querySelectorAll("[data-count]").forEach(n => {
+      const end = +n.dataset.count, t0 = performance.now();
+      const step = t => { const p = Math.min(1, (t - t0) / 1600); n.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+    io.unobserve(e.target);
+  }), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // Floating embers
+  const cv = document.getElementById("embers"), ctx = cv.getContext("2d");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W, H, parts = [];
+  const resize = () => { W = cv.width = cv.offsetWidth * devicePixelRatio; H = cv.height = cv.offsetHeight * devicePixelRatio; };
+  const spawn = (y) => ({ x: Math.random() * W, y: y ?? H + 10, r: (Math.random() * 2.2 + .6) * devicePixelRatio, vy: -(Math.random() * 1.2 + .4) * devicePixelRatio, vx: (Math.random() - .5) * .6, life: Math.random() * .6 + .4, ph: Math.random() * 6.28 });
+  resize(); addEventListener("resize", resize);
+  if (!reduce) {
+    for (let i = 0; i < 90; i++) parts.push(spawn(Math.random() * H));
+    (function loop() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of parts) {
+        p.ph += .03; p.x += p.vx + Math.sin(p.ph) * .5; p.y += p.vy;
+        const a = Math.max(0, Math.min(1, p.y / H)) * p.life;
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+        g.addColorStop(0, `rgba(255,200,90,${a})`); g.addColorStop(.4, `rgba(255,90,20,${a * .6})`); g.addColorStop(1, "rgba(255,60,0,0)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, 6.28); ctx.fill();
+        if (p.y < -20) Object.assign(p, spawn());
+      }
+      requestAnimationFrame(loop);
+    })();
+  }
+</script>
+</body>
+</html>
