@@ -7,7 +7,7 @@
 <meta name="description" content="Fire-resistant roll shutters for California homes. Visit Inferno-Roll at the Malibu Chamber of Commerce.">
 <meta property="og:title" content="Inferno-Roll Shutters — Meet us at the Malibu Chamber">
 <meta property="og:description" content="Protection from embers, heat, wind and intruders. Lowered in seconds.">
-<meta property="og:image" content="https://nazargeldy.github.io/inferno-shutters/images/hero.webp">
+<meta property="og:image" content="https://nazargeldy.github.io/inferno-shutters/images/house-fire.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%227%22 fill=%22%231d1d1f%22/><g fill=%22%23f5f5f7%22><rect x=%228%22 y=%229%22 width=%2216%22 height=%222%22 rx=%221%22/><rect x=%228%22 y=%2213%22 width=%2216%22 height=%222%22 rx=%221%22/><rect x=%228%22 y=%2217%22 width=%2216%22 height=%222%22 rx=%221%22/><rect x=%228%22 y=%2221%22 width=%2216%22 height=%222%22 rx=%221%22/></g></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -74,8 +74,9 @@
   .hero-bg .layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; }
   .hero-bg .layer.on { opacity: 1; }
   .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.28) 38%, rgba(0,0,0,.42) 70%, rgba(0,0,0,.85) 100%); }
-  .hero .pill { display: inline-flex; gap: 8px; align-items: center; font-size: 14px; color: rgba(255,255,255,.85); background: rgba(0,0,0,.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 980px; padding: 6px 14px; margin-bottom: 24px; }
-  .hero .pill i { width: 7px; height: 7px; border-radius: 50%; background: #ff6a2b; box-shadow: 0 0 0 4px rgba(255,106,43,.25); }
+  .hero .invite { font-size: clamp(20px, 3.2vw, 40px); line-height: 1.15; font-weight: 600; letter-spacing: -.02em; margin: 0 0 22px; text-shadow: 0 2px 24px rgba(0,0,0,.45); }
+  .hero .pill { display: inline-flex; gap: 12px; align-items: center; font-size: 28px; font-weight: 500; color: rgba(255,255,255,.85); background: rgba(0,0,0,.35); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-radius: 980px; padding: 10px 24px; margin-bottom: 26px; }
+  .hero .pill i { width: 10px; height: 10px; border-radius: 50%; background: #ff6a2b; box-shadow: 0 0 0 4px rgba(255,106,43,.25); }
   .hero .headline { text-shadow: 0 2px 30px rgba(0,0,0,.35); }
   .hero .sub { color: rgba(255,255,255,.86); max-width: 680px; margin: 18px auto 0; text-shadow: 0 1px 20px rgba(0,0,0,.4); }
   .hero .link-arrow { color: #fff; font-size: 17px; }
@@ -86,12 +87,18 @@
   @keyframes dot { from { transform: scaleX(0); } to { transform: scaleX(1); } }
   .hero .rise { opacity: 0; transform: translateY(18px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
   .loaded .hero .rise { opacity: 1; transform: none; }
-  .loaded .hero .rise:nth-child(2) { transition-delay: .12s; } .loaded .hero .rise:nth-child(3) { transition-delay: .24s; } .loaded .hero .rise:nth-child(4) { transition-delay: .36s; }
+  .loaded .hero .rise:nth-child(2) { transition-delay: .12s; } .loaded .hero .rise:nth-child(3) { transition-delay: .24s; } .loaded .hero .rise:nth-child(4) { transition-delay: .36s; } .loaded .hero .rise:nth-child(5) { transition-delay: .48s; }
   
   section { padding: clamp(80px, 11vw, 140px) 0; }
   .mist { background: var(--mist); }
   .dark { background: var(--night); color: var(--night-ink); }
   .dark .sub { color: var(--night-ink-2); }
+
+  /* ANSWER */
+  .answer { padding: clamp(56px, 7vw, 88px) 0; background: var(--night); color: #fff; border-top: 1px solid #1c1c1e; }
+  .answer-q { margin: 0 0 10px; color: var(--night-ink-2); font-size: clamp(17px, 2vw, 21px); }
+  .answer-a { font-size: clamp(32px, 5vw, 60px); line-height: 1.08; }
+  .answer-a span { color: #ff8a50; }
 
   /* WHY NOW */
   .statement { font-size: clamp(28px, 3.8vw, 48px); line-height: 1.12; font-weight: 600; letter-spacing: -.028em; max-width: 900px; margin: 0; }
@@ -103,7 +110,7 @@
   @media (max-width: 760px) { .trio { grid-template-columns: 1fr; gap: 32px; } }
 
   .why-photo { margin: 64px auto 0; width: min(var(--wide), 100% - 32px); border-radius: var(--r-lg); overflow: hidden; position: relative; }
-  .why-photo img { width: 100%; height: auto; aspect-ratio: 2000 / 1000; object-fit: cover; object-position: center 55%; transform: scale(1.06); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
+  .why-photo img { width: 100%; height: auto; aspect-ratio: 922 / 560; object-fit: cover; object-position: center 60%; transform: scale(1.06); transition: transform 1.8s cubic-bezier(.16,1,.3,1); }
   .why-photo.in img { transform: scale(1); }
   .why-photo figcaption { position: absolute; left: 20px; bottom: 18px; color: #fff; font-size: 14px; font-weight: 500; text-shadow: 0 1px 12px rgba(0,0,0,.6); }
   @media (max-width: 700px) { .why-photo { width: 100%; border-radius: 0; margin-top: 44px; } .why-photo img { aspect-ratio: 4 / 3.2; object-position: 58% center; } }
@@ -162,25 +169,17 @@
   @media (prefers-reduced-motion: reduce) { .coastal .frame img { transform: none; transition: none; } }
 
   /* MODELS */
-  .models { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 64px; }
-  .model { padding: 32px 26px 30px; background: var(--mist); border-radius: var(--r-md); }
-    .slat { height: 74px; margin-bottom: 28px; display: grid; gap: 5px; align-content: center; }
-  .slat i { display: block; height: 10px; border-radius: 5px; background: linear-gradient(180deg, #e9e9ec, #bfbfc4); box-shadow: inset 0 -1px 0 rgba(0,0,0,.08); }
-  .model:nth-child(2) .slat i { background: linear-gradient(180deg, #d9d4ca, #a9a294); }
-  .model:nth-child(3) .slat i { height: 14px; background: linear-gradient(180deg, #57575c, #2c2c2e); }
-  .model:nth-child(4) .slat i { height: 8px; background: linear-gradient(180deg, #f0ede6, #cfc9bc); }
-  .model h3 { font-size: 28px; }
-  .model .what { color: var(--ink-2); margin: 6px 0 22px; min-height: 52px; }
+  .models { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 64px; }
+  .model { padding: 18px 20px 26px; background: var(--mist); border-radius: var(--r-md); }
+  .model img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: #fff; border-radius: 8px; margin-bottom: 22px; mix-blend-mode: multiply; }
+  .model h3 { font-size: 24px; }
+  .model .what { color: var(--ink-2); margin: 6px 0 18px; min-height: 72px; font-size: 15px; }
   .model dl { margin: 0; font-size: 14px; }
-  .model dt { color: var(--ink-3); font-size: 12px; margin-top: 14px; }
+  .model dt { color: var(--ink-3); font-size: 12px; margin-top: 12px; }
   .model dd { margin: 2px 0 0; }
-  @media (max-width: 860px) {
-    .models { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 520px) {
-    .models { grid-template-columns: 1fr; }
-    .model .what { min-height: 0; }
-  }
+  @media (max-width: 1100px) { .models { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 760px) { .models { grid-template-columns: 1fr 1fr; } .model .what { min-height: 0; } }
+  @media (max-width: 460px) { .models { grid-template-columns: 1fr; } }
 
   /* PARTNERS */
   .partner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -261,7 +260,8 @@
     .headline { font-size: 40px; }
     .hero { padding: 96px 0 110px; }
     .scene { bottom: 20px; font-size: 11px; }
-    .hero .pill { font-size: 12.5px; }
+    .hero .pill { font-size: 16px; padding: 8px 16px; gap: 8px; }
+    .hero .invite { font-size: 21px; margin-bottom: 16px; }
     .actions { flex-direction: column; gap: 18px; }
     .actions .btn { width: 100%; max-width: 320px; min-height: 50px; }
     .trio { margin-top: 48px; }
@@ -303,11 +303,12 @@
 
 <header class="hero center" id="top">
   <div class="hero-bg" aria-hidden="true">
-    <video class="layer on" id="storm" muted autoplay playsinline preload="auto" poster="images/storm-poster.jpg"></video>
-    <video class="layer" id="fire" muted playsinline preload="metadata" poster="images/fire-poster.jpg"></video>
+    <video class="layer" id="storm" muted playsinline preload="metadata" poster="images/storm-poster.jpg"></video>
+    <video class="layer on" id="fire" muted autoplay playsinline preload="auto" poster="images/fire-poster.jpg"></video>
   </div>
   <div class="wrap">
-    <div class="pill rise"><i></i>Malibu Chamber of Commerce · <span data-booth-inline>Booth TBA</span></div>
+    <p class="invite rise">Your invitation to the Palibu Resource and Recovery Expo</p>
+    <div class="pill rise"><i></i>Malibu Chamber of Commerce · <span data-booth-inline>Booth 68</span></div>
     <h1 class="headline rise">Your home, sealed<br>in seconds.</h1>
     <p class="sub rise">Fire-resistant roll shutters that keep out embers, flames, heat and intruders, as well as the wind, storms and rain of El Niño.</p>
     <div class="actions rise">
@@ -316,10 +317,17 @@
     </div>
   </div>
   <div class="scene" aria-hidden="true">
-    <span id="scene-label">Coastal storm surge</span>
-    <span class="scene-dots"><i id="dot-storm"></i><i id="dot-fire"></i></span>
+    <span id="scene-label">California wildfire</span>
+    <span class="scene-dots"><i id="dot-fire"></i><i id="dot-storm"></i></span>
   </div>
 </header>
+
+<section class="answer">
+  <div class="wrap center">
+    <p class="answer-q fade">Fire. Wind. Storms. One answer.</p>
+    <h2 class="answer-a fade">The solution is <span>Inferno-Roll Shutters.</span></h2>
+  </div>
+</section>
 
 <section id="why">
   <div class="wrap">
@@ -344,7 +352,7 @@
     </div>
   </div>
   <figure class="why-photo fade">
-    <img src="images/hero.webp" alt="Modern hillside home with charcoal roll shutters lowered while a wildfire burns on the distant ridge" loading="lazy" width="2000" height="1116">
+    <img src="images/house-fire.jpg" alt="Modern stone-and-stucco home with every window and garage sealed by roll shutters as a wildfire burns on the hillside" loading="lazy" width="922" height="615">
     <figcaption>Shutters down. Fire on the ridge.</figcaption>
   </figure>
 </section>
@@ -353,7 +361,7 @@
   <div class="wrap">
     <h2 class="title fade">The numbers behind it.</h2>
     <div class="stats">
-      <div class="stat fade"><div class="n"><span data-count="180">0</span>°F</div><p>is when the shutters close on their own, measured in the shade. No one needs to be home.</p><small>Inferno-Roll automatic deployment</small><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="stat fade"><div class="n"><span data-count="180">0</span>°F</div><p>is when all shutters close automatically, measured in the shade. No one needs to be home.</p><small>Inferno-Roll automatic deployment</small><div class="bar"><i style="--w:100%"></i></div></div>
       <div class="stat fade"><div class="n"><span data-count="150">0</span>+</div><p>mph wind resistance from rolling shutter systems.</p><small>Sun &amp; Security</small><div class="bar"><i style="--w:100%"></i></div></div>
       <div class="stat fade"><div class="n"><span data-count="12">0</span>+</div><p>years installing roll shutters across North America.</p><small>Sun &amp; Security</small><div class="bar"><i style="--w:100%"></i></div></div>
     </div>
@@ -425,36 +433,42 @@
   <div class="wrap">
     <div class="center">
       <div class="eyebrow fade">The lineup</div>
-      <h2 class="title fade">Four slats. One standard.</h2>
-      <p class="sub fade" style="max-width:620px;margin:16px auto 0">Patent-pending fire-resistant designs, available in standard and custom colors.</p>
+      <h2 class="title fade">Five slats. One standard.</h2>
+      <p class="sub fade" style="max-width:640px;margin:16px auto 0">Fire-resistant aluminum and stainless-steel profiles, available in standard and custom colors.</p>
     </div>
     <div class="models">
       <div class="model fade">
-        <div class="slat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <img src="images/slat-i4000.jpg" alt="I 4000 roll-formed aluminum slat with regular density foam filling" loading="lazy" width="800" height="800">
         <h3>I 4000</h3>
-        <p class="what">Roll-formed aluminum, foam filled.</p>
-        <dl><dt>Core</dt><dd>Regular-density foam</dd><dt>Best for</dt><dd>Insulation and everyday use</dd></dl>
+        <p class="what">Roll-formed aluminum, regular density foam filling.</p>
+        <dl><dt>Slat height</dt><dd>1 9/16 in (40 mm)</dd><dt>Max size</dt><dd>80 sq ft · 144 × 126 in</dd></dl>
       </div>
       <div class="model fade">
-        <div class="slat" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <img src="images/slat-i4400.jpg" alt="I 4400 roll-formed aluminum slat with ultra hard resin core" loading="lazy" width="800" height="800">
         <h3>I 4400</h3>
-        <p class="what">Roll-formed aluminum, resin core.</p>
-        <dl><dt>Core</dt><dd>Ultra-hard resin</dd><dt>Best for</dt><dd>Added rigidity</dd></dl>
+        <p class="what">Roll-formed aluminum, ultra hard resin core.</p>
+        <dl><dt>Slat height</dt><dd>1 15/32 in (37 mm)</dd><dt>Max size</dt><dd>140 sq ft · 204 × 144 in</dd></dl>
       </div>
       <div class="model fade">
-        <div class="slat" aria-hidden="true"><i></i><i></i><i></i></div>
+        <img src="images/slat-i4500.jpg" alt="I 4500 double wall extruded aluminum slat" loading="lazy" width="800" height="800">
         <h3>I 4500</h3>
-        <p class="what">Double-wall extruded aluminum.</p>
-        <dl><dt>Max size</dt><dd>140 sq ft · 192 × 144 in</dd><dt>Best for</dt><dd>Maximum strength, large openings</dd></dl>
+        <p class="what">Double wall extruded aluminum.</p>
+        <dl><dt>Slat height</dt><dd>1 9/16 in (40 mm)</dd><dt>Max size</dt><dd>140 sq ft · 192 × 144 in</dd></dl>
       </div>
       <div class="model fade">
-        <div class="slat" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <img src="images/slat-i5600.jpg" alt="I 5600 single wall extruded aluminum slat" loading="lazy" width="800" height="800">
         <h3>I 5600</h3>
-        <p class="what">Single-wall extruded aluminum.</p>
-        <dl><dt>Profile</dt><dd>Slim and durable</dd><dt>Best for</dt><dd>Clean lines on modern homes</dd></dl>
+        <p class="what">Single wall extruded aluminum.</p>
+        <dl><dt>Slat height</dt><dd>2 7/32 in (56 mm)</dd><dt>Max size</dt><dd>200 sq ft · 264 × 180 in</dd></dl>
+      </div>
+      <div class="model model-ss fade">
+        <img src="images/slat-irc3ss.jpg" alt="I RC3 SS stainless steel slat" loading="lazy" width="800" height="800">
+        <h3>I RC3 SS</h3>
+        <p class="what">Stainless steel, ultra hard density foam. High-security RC 3 rated.</p>
+        <dl><dt>Slat height</dt><dd>2 in (50 mm)</dd><dt>Max size</dt><dd>193.8 sq ft · 19.7 × 13.1 ft</dd></dl>
       </div>
     </div>
-    <p class="center fade" style="margin-top:48px"><a class="link-arrow" href="https://www.infernoshutters.com" target="_blank" rel="noopener">Full specifications at infernoshutters.com</a></p>
+    <p class="center fade" style="margin-top:48px"><a class="link-arrow" href="docs/inferno-roll-slat-series.pdf" target="_blank" rel="noopener">View all slat profiles (PDF)</a></p>
   </div>
 </section>
 
@@ -476,7 +490,8 @@
       <li><span>Financing</span><b>Up to 100% available</b></li>
       <li><span>Fire testing</span><b>Tested at Western Fire Center</b></li>
       <li><span>Bushfire rating</span><b>Stainless-steel system: BAL-FZ &amp; BAL-40 (AS 1530.8.2)</b></li>
-      <li><span>Automatic deployment</span><b>Closes on its own at around 180°F in the shade</b></li>
+      <li><span>Automatic deployment</span><b>All shutters close automatically at around 180°F in the shade</b></li>
+      <li><span>Alternative deployment</span><b>Manual, remote control or app</b></li>
       <li><span>Manufacturing</span><b>Made in the USA</b></li>
     </ul>
   </div>
@@ -485,13 +500,13 @@
 <section class="dark" id="booth">
   <div class="wrap booth-grid" id="contact">
     <div>
-      <div class="eyebrow fade" style="color:#ff8a50">Malibu Chamber of Commerce</div>
-      <h2 class="title fade">Come see it in person.</h2>
+      <div class="eyebrow fade" style="color:#ff8a50;font-size:clamp(24px,3.4vw,34px);line-height:1.15">Malibu Chamber of Commerce</div>
+      <h2 class="title fade" style="margin-top:22px">Come see it in person.</h2>
       <p class="sub fade" style="margin-top:16px">Stop by our booth to see the slats up close, watch a live demo, and talk through your home with David Horobin.</p>
       <div class="booth-card fade">
         <div class="label">Find us at</div>
-        <div class="num" data-booth>Booth TBA</div>
-        <p data-booth-note>Booth number announced soon.</p>
+        <div class="num" data-booth>Booth 68</div>
+        <p data-booth-note>Palibu Resource and Recovery Expo</p>
       </div>
       <div class="person fade">
         <div class="av">DH</div>
@@ -500,7 +515,9 @@
       <div class="contact-lines fade">
         <a href="tel:+17073374144"><small>David's direct line</small>(707) 337-4144</a>
         <a href="tel:+18889998809"><small>Office</small>(888) 999-8809</a>
-        <a href="mailto:david@infernoshutters.com"><small>Email</small>david@infernoshutters.com</a>
+        <a href="tel:+13104993754"><small>Glenn's direct line (Arizona)</small>(310) 499-3754</a>
+        <a href="mailto:david@infernoshutters.com"><small>Email · David</small>david@infernoshutters.com</a>
+        <a href="mailto:glenn@infernoshutters.com"><small>Email · Glenn</small>glenn@infernoshutters.com</a>
         <a href="https://www.infernoshutters.com" target="_blank" rel="noopener"><small>Website</small>infernoshutters.com</a>
       </div>
     </div>
@@ -549,7 +566,7 @@
 
 <script>
   // Set the booth number here once it's confirmed, e.g. "214".
-  const BOOTH = "TBA";
+  const BOOTH = "68";
   // Form submissions are emailed to this address (via FormSubmit).
   const LEAD_EMAIL = "david@infernoshutters.com";
   // HubSpot (Inferno already runs HubSpot portal 247352385 on infernoshutters.com).
@@ -559,7 +576,7 @@
 
   if (BOOTH !== "TBA") {
     document.querySelectorAll("[data-booth], [data-booth-inline]").forEach(el => el.textContent = "Booth " + BOOTH);
-    document.querySelectorAll("[data-booth-note]").forEach(el => el.textContent = "Malibu Chamber of Commerce");
+    document.querySelectorAll("[data-booth-note]").forEach(el => el.textContent = "Palibu Resource and Recovery Expo · Malibu Chamber of Commerce");
   }
 
   const io = new IntersectionObserver(es => es.forEach(e => {
@@ -588,8 +605,8 @@
   const small = innerWidth <= 800;
   const label = document.getElementById("scene-label");
   const scenes = [
-    { el: document.getElementById("storm"), dot: document.getElementById("dot-storm"), src: small ? "videos/storm-540.mp4" : "videos/storm-1080.mp4", label: "Coastal storm surge" },
-    { el: document.getElementById("fire"),  dot: document.getElementById("dot-fire"),  src: small ? "videos/fire-540.mp4"  : "videos/fire-1080.mp4",  label: "California wildfire" }
+    { el: document.getElementById("fire"),  dot: document.getElementById("dot-fire"),  src: small ? "videos/fire-540.mp4"  : "videos/fire-1080.mp4",  label: "California wildfire" },
+    { el: document.getElementById("storm"), dot: document.getElementById("dot-storm"), src: small ? "videos/storm-540.mp4" : "videos/storm-1080.mp4", label: "Coastal storm surge" }
   ];
   const STILL_MS = 6000;
   let cur = 0, timer, heroVisible = true, canPlayVideo = true;
