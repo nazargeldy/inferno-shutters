@@ -649,6 +649,58 @@
       if (!document.hidden && heroVisible && canPlayVideo) scenes[cur].el.play().catch(() => {});
     });
   }
+
+  // Lead form: sends to HubSpot (or FormSubmit if no HubSpot form ID is set)
+  const form = document.getElementById("lead");
+  const err = document.getElementById("form-err");
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const name = (fd.get("name") || "").trim(), email = (fd.get("email") || "").trim();
+    if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
+      err.textContent = "Please enter your name and a valid email."; err.style.display = "block"; return;
+    }
+    err.style.display = "none";
+    const btn = form.querySelector("button");
+    btn.disabled = true; btn.textContent = "Sending…";
+    const data = {
+      name, email,
+      phone: fd.get("phone") || "",
+      city: fd.get("city") || "",
+      interests: fd.getAll("interest").join(", ") || "—",
+      message: fd.get("message") || "",
+      visiting_booth: fd.get("booth_visit") ? "Yes" : "Not sure",
+      _honey: fd.get("_honey") || "",
+      _subject: "New Malibu Chamber lead: " + name,
+      _template: "table"
+    };
+    try {
+      let r;
+      if (HUBSPOT_FORM_GUID) {
+        const [firstname, ...rest] = name.split(/\s+/);
+        const note = [data.message, "Interests: " + data.interests, "Visiting booth: " + data.visiting_booth].filter(Boolean).join("\n");
+        const fields = { firstname, lastname: rest.join(" "), email, phone: data.phone, city: data.city, message: note };
+        const hutk = (document.cookie.match(/hubspotutk=([^;]+)/) || [])[1];
+        r = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL}/${HUBSPOT_FORM_GUID}`, {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            fields: Object.entries(fields).filter(([, v]) => v).map(([name, value]) => ({ name, value })),
+            context: { pageUri: location.href, pageName: document.title, ...(hutk && { hutk }) }
+          })
+        });
+      } else {
+        r = await fetch("https://formsubmit.co/ajax/" + LEAD_EMAIL, {
+          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data)
+        });
+      }
+      if (!r.ok) throw new Error();
+      document.getElementById("form-body").style.display = "none";
+      document.getElementById("form-ok").style.display = "block";
+    } catch {
+      err.innerHTML = 'Something went wrong. Please call David at <a href="tel:+17073374144">(707) 337-4144</a> or email <a href="mailto:' + LEAD_EMAIL + '">' + LEAD_EMAIL + '</a>.';
+      err.style.display = "block"; btn.disabled = false; btn.textContent = "Request a consultation";
+    }
+  });
 </script>
 </body>
 </html>
