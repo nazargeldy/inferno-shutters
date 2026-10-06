@@ -305,6 +305,8 @@
 <header class="hero center" id="top">
   <div class="hero-bg" aria-hidden="true">
     <video class="layer" id="storm" muted playsinline preload="metadata" poster="images/storm-poster.jpg"></video>
+    <video class="layer" id="fire2" muted playsinline preload="none" poster="images/fire2-poster.jpg"></video>
+    <video class="layer" id="storm2" muted playsinline preload="none" poster="images/storm2-poster.jpg"></video>
     <video class="layer on" id="fire" muted autoplay playsinline preload="auto" poster="images/fire-poster.jpg"></video>
   </div>
   <div class="wrap">
@@ -319,7 +321,7 @@
   </div>
   <div class="scene" aria-hidden="true">
     <span id="scene-label">California wildfire</span>
-    <span class="scene-dots"><i id="dot-fire"></i><i id="dot-storm"></i></span>
+    <span class="scene-dots"><i id="dot-fire"></i><i id="dot-storm"></i><i id="dot-fire2"></i><i id="dot-storm2"></i></span>
   </div>
 </header>
 
@@ -605,9 +607,13 @@
   requestAnimationFrame(() => document.body.classList.add("loaded"));
   const small = innerWidth <= 800;
   const label = document.getElementById("scene-label");
+  // Four different 5-second clips, alternating fire and storm
+  const clip = (id, label) => ({ el: document.getElementById(id), dot: document.getElementById("dot-" + id), src: `videos/${id}-${small ? 540 : 1080}.mp4`, label });
   const scenes = [
-    { el: document.getElementById("fire"),  dot: document.getElementById("dot-fire"),  src: small ? "videos/fire-540.mp4"  : "videos/fire-1080.mp4",  label: "California wildfire" },
-    { el: document.getElementById("storm"), dot: document.getElementById("dot-storm"), src: small ? "videos/storm-540.mp4" : "videos/storm-1080.mp4", label: "Coastal storm surge" }
+    clip("fire", "California wildfire"),
+    clip("storm", "Coastal storm surge"),
+    clip("fire2", "California wildfire"),
+    clip("storm2", "Coastal storm surge")
   ];
   const STILL_MS = 6000;
   let cur = 0, timer, heroVisible = true, canPlayVideo = true;
