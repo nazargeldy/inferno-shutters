@@ -192,6 +192,15 @@
   .facts span { color: var(--ink-2); flex: none; }
   @media (max-width: 860px) { .partner { grid-template-columns: 1fr; gap: 40px; } }
 
+  /* EVENT FLYERS */
+  .flyers { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+  .flyer { margin: 0; }
+  .flyer a { display: block; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,.08); transition: transform .3s; }
+  .flyer a:hover { transform: translateY(-4px); }
+  .flyer img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+  .flyer figcaption { margin-top: 12px; text-align: center; font-size: 15px; color: var(--ink-2); }
+  @media (max-width: 700px) { .flyers { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; } }
+
   /* BOOTH + FORM */
   .booth-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
   .booth-card { margin-top: 36px; border-radius: var(--r-md); background: #1c1c1e; padding: 28px; }
@@ -498,6 +507,26 @@
       <li><span>Alternative deployment</span><b>Manual, remote control or app</b></li>
       <li><span>Manufacturing</span><b>Made in the USA</b></li>
     </ul>
+  </div>
+</section>
+
+<section class="mist" id="event">
+  <div class="wrap">
+    <div class="center">
+      <div class="eyebrow fade">Event details</div>
+      <h2 class="title fade">Resource &amp; Recovery Expo</h2>
+      <p class="sub fade" style="max-width:640px;margin:16px auto 0">Sunday, October 11 · 11 AM – 3 PM · 15233 La Cruz Drive, Pacific Palisades. Free expert talks at 11:30, 12:30 and 1:30.</p>
+    </div>
+    <div class="flyers">
+      <figure class="flyer fade">
+        <a href="images/flyer-expo.jpg" target="_blank" rel="noopener"><img src="images/flyer-expo.jpg" alt="Resource and Recovery Expo flyer with date, address and street map" loading="lazy" width="1254" height="1254"></a>
+        <figcaption>Expo details &amp; map · tap to enlarge</figcaption>
+      </figure>
+      <figure class="flyer fade">
+        <a href="images/flyer-talks.jpg" target="_blank" rel="noopener"><img src="images/flyer-talks.jpg" alt="Resource and Recovery Expo Talks schedule with 11:30, 12:30 and 1:30 panels" loading="lazy" width="1254" height="1254"></a>
+        <figcaption>Expert talks schedule · tap to enlarge</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
